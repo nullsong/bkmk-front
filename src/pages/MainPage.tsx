@@ -1,8 +1,45 @@
+import axiosInstance from "../api/axiosInstance";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+
 const MainPage = () => {
+
+  const [keyword,setKeyword] = useState('');
+
+  const changeInput = (e: any) => {
+    const val = e.target.value;
+    setKeyword(val);
+  }
+
+  /**
+   * 책 목록 조회 
+   */
+  const getBooks = async(param: any) => {
+    const response = await axiosInstance.get('/book/' ,{ params: param });
+    return response.data;
+  };
+
+  const { data , refetch } = useQuery({
+    queryKey: ['books', keyword],
+    queryFn: () => getBooks({keyword}),
+    enabled: false,
+  })
+
+  data && console.log(data);
 
   return (
     <>
       <div className="relative w-full h-[1527px] bg-[#F7F7F7] pt-[160px]">
+        {/* 검색바 */}
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="책 제목, 저자 검색"
+          className="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm"
+          onChange={changeInput}
+        />
+        <button onClick={() => refetch()}>임시버튼(검색용)</button>
+      </div>
       {/* Tabs */}
       <div className="w-[375px] h-[52px] flex flex-row justify-center items-start bg-white mx-auto">
         {/* 탭 메뉴 */}
