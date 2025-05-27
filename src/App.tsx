@@ -1,9 +1,8 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import './index.css'; 
-import { MainPage } from '@pages';
-import SearchPage from 'pages/search/SearchPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import './index.css'; 
+import { DetailPage, MainPage, SearchPage } from '@pages';
 
 const queryClient = new QueryClient();
 
@@ -14,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/book/:id" element={<DetailPage />} />
       </Routes>
       </QueryClientProvider>
     </BrowserRouter>

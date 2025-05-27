@@ -1,8 +1,10 @@
 import axiosInstance from "@api/axiosInstance";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
+  const navigate = useNavigate();
 
   const [keyword,setKeyword] = useState('');
 
@@ -40,6 +42,14 @@ const MainPage = () => {
         />
         <button onClick={() => refetch()}>임시버튼(검색용)</button>
       </div>
+      <div>
+      {data && data?.map((e: any) => (
+        <>
+        <div>{e.title}</div>
+        <button onClick={()=>navigate(`/book/${e.isbn}`, { state: e })}>상세 이동버튼</button>
+        </>))
+      }
+        </div>
       {/* Tabs */}
       <div className="w-[375px] h-[52px] flex flex-row justify-center items-start bg-white mx-auto">
         {/* 탭 메뉴 */}
