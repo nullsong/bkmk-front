@@ -1,13 +1,57 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import axiosInstance from "@api/axiosInstance";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+
+type ReviewParam = {
+  reviewRating: number;
+  isbn: string;
+  bookInfo: {
+    title: string;
+    author: string;
+    publisher: string;
+    publishedDate: string;
+    image: string;
+    description: string;
+  };
+};
 
 const DetailPage = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
+
   const [rating, setRating] = useState(0);
 
   const handleChange = (e : any) => {
     setRating(e.target.value);
   }
+
+const createMyReview = async (param: ReviewParam): Promise<any> => {
+  const res = await axiosInstance.post('/review/', param);
+  return res.data;
+};
+
+const { mutate } = useMutation<any, Error, ReviewParam>({
+  mutationFn: createMyReview,
+  onSuccess: async () => {
+      alert("리뷰가 저장되었습니다!");
+      navigate('/');
+    },
+  });
+
+  const handleClick = () => {
+    mutate({
+          reviewRating : rating ,
+          isbn : state.isbn,
+          bookInfo : { title : state.title,
+                       author : state.author,
+                       publisher : state.publisher,
+                       publishedDate : state.publishedDate,
+                       image : state.image,
+                       description : state.description
+                    }
+    })
+  };
 
   return (
     <>
@@ -28,7 +72,7 @@ const DetailPage = () => {
       <option value={4}>⭐️⭐️⭐️⭐️</option>
       <option value={5}>⭐️⭐️⭐️⭐️⭐️</option>
     </select>
-    {rating > 0 && <button>저장하기 버튼</button>}
+    {rating > 0 && <button onClick={handleClick}>저장하기 버튼</button>}
     </div>
     </>
   );
