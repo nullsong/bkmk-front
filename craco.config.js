@@ -14,5 +14,8 @@ module.exports = {
       '@css': path.resolve(__dirname, 'src/assets/css'),
       '@utils': path.resolve(__dirname, 'src/utils')
     }
+  },
+    devServer: {
+    allowedHosts: 'all',
   }
 };

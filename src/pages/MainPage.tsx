@@ -29,6 +29,21 @@ const MainPage = () => {
 
   data && console.log(data);
 
+  /**
+   * 내 리뷰 조회 
+   */
+  const getReviews = async(param: any) => {
+    const response = await axiosInstance.get('/review/list' ,{ params: param });
+    return response.data;
+  };
+
+  const { data : rData } = useQuery({
+    queryKey: ['reviews'],
+    queryFn: () => getReviews({ userId: "1"}),
+    enabled: true,
+  })
+
+
   return (
     <>
       <div className="relative w-full h-[1527px] bg-[#F7F7F7] pt-[160px]">
@@ -66,9 +81,14 @@ const MainPage = () => {
         </div>
 
         {/* 읽은 책 박스 */}
-        <div className="w-full bg-white p-4 rounded shadow-sm">데미안</div>
-        <div className="w-full bg-white p-4 rounded shadow-sm">위대한 개츠비</div>
-        <div className="w-full bg-white p-4 rounded shadow-sm">폭풍의 언덕</div>
+        {rData && rData?.map((e: any) => (
+          <>
+          <div className="w-full bg-white p-4 rounded shadow-sm">
+            <div>{e.title}</div>
+            <div>{e.reviewRating}</div>
+          </div>
+          </>))
+        }
       </div>
       </div>
       </>
