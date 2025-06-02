@@ -1,7 +1,16 @@
-const SearchPage = () => {
+import { useLocation } from "react-router-dom";
 
+const SearchPage = () => {
+    const { state } = useLocation();
+
+    console.log(state)
     return (
-        <>검색페이지...</>
+        <>
+        {state.map((e: any) => (
+            <div>
+                *{e.title} || {e.author} || {e.publisher}
+            </div>
+        ))}</>
     )
 }
 
