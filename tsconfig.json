@@ -22,7 +22,7 @@
     "baseUrl": "./src",
     "outDir": "./dist/",
     "paths": {
-      "@/*": [" *"],
+      "@/*": ["*"],
       "@pages": ["pages/index"],
       "@components": ["components/index"],
       "@container": ["container/index"],

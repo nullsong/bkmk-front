@@ -1,5 +1,6 @@
 import axiosInstance from "@api/axiosInstance";
 import { useQuery } from "@tanstack/react-query";
+import Header from "components/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +15,7 @@ const MainPage = () => {
   }
 
   /**
-   * 책 목록 조회 
+   * 책 검색
    */
   const getBooks = async(param: any) => {
     const response = await axiosInstance.get('/book/' ,{ params: param });
@@ -46,53 +47,41 @@ const MainPage = () => {
 
   return (
     <>
-      <div className="relative w-full h-[1527px] bg-[#F7F7F7] pt-[160px]">
-        {/* 검색바 */}
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="책 제목, 저자 검색"
-          className="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm"
-          onChange={changeInput}
-        />
-        <button onClick={() => refetch()}>임시버튼(검색용)</button>
-      </div>
-      <div>
-      {data && data?.map((e: any) => (
-        <>
-        <div>{e.title}</div>
-        <button onClick={()=>navigate(`/book/${e.isbn}`, { state: e })}>상세 이동버튼</button>
-        </>))
-      }
-        </div>
-      {/* Tabs */}
-      <div className="w-[375px] h-[52px] flex flex-row justify-center items-start bg-white mx-auto">
-        {/* 탭 메뉴 */}
-        <button className="px-4 py-2 text-sm font-medium text-gray-400">내가 읽은 책</button>
-        <button className="px-4 py-2 text-sm font-medium text-gray-400">나의 독서</button>
-      </div>
-     
-      {/* Body Content */}
-      <div className="flex flex-col items-start gap-[10px] px-4">
-        {/* 책 추가 박스 */}
-        <div className="w-fçull bg-white p-4 rounded shadow-sm">
-          <h2 className="text-lg font-bold">+</h2>
-          <p className="text-sm text-gray-600 mt-1">책 추가</p>
+    <Header />
+    <div className="relative w-full max-w-[600px] min-h-screen pt-[125px] mx-auto bg-[#F7F7F7]">
+      {/* 내가 읽은 책 */}
+      <section className="w-full bg-white px-4 sm:px-7 py-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
+          {rData && rData?.map((e: any, i: number) => (
+            <div
+              key={i}
+              className="flex flex-col justify-center items-center p-6 gap-6 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
+            >
+              <div className="relative w-[263px] h-[225px]">
+                <img
+                  src={e.image}
+                  alt={`${e.title}image`}
+                  className="absolute w-[150px] h-[225px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-cover" />
+              </div>
+              <div className="flex flex-col items-center gap-[10px] w-full">
+                <div className="text-center text-[#242424] font-bold text-[16px] leading-[19px]">
+                  {e.title}
+                </div>
+                <div className="text-center text-[#808080] text-[14px] leading-[17px]">
+                  {e.reviewRating}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* 읽은 책 박스 */}
-        {rData && rData?.map((e: any) => (
-          <>
-          <div className="w-full bg-white p-4 rounded shadow-sm">
-            <div>{e.title}</div>
-            <div>{e.reviewRating}</div>
-          </div>
-          </>))
-        }
-      </div>
-      </div>
-      </>
-
+        <div className="flex justify-center mt-6">
+          <button className="flex justify-center items-center py-[19.5px] px-10 gap-2 w-full max-w-[319px] border border-[#EBEBEB] rounded">
+            <span className="text-[#242424] font-bold text-[14px] leading-[17px]">Browse</span>
+          </button>
+        </div>
+      </section>
+    </div></>
   );
 }
 
