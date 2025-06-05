@@ -9,6 +9,7 @@ type ReviewParam = {
   bookInfo: {
     title: string;
     author: string;
+    isbn: string;
     publisher: string;
     publishedDate: string;
     image: string;
@@ -45,6 +46,7 @@ const { mutate } = useMutation<any, Error, ReviewParam>({
           isbn : state.isbn,
           bookInfo : { title : state.title,
                        author : state.author,
+                       isbn: state.isbn,
                        publisher : state.publisher,
                        publishedDate : state.publishedDate,
                        image : state.image,

@@ -56,6 +56,7 @@ const MainPage = () => {
             <div
               key={i}
               className="flex flex-col justify-center items-center p-6 gap-6 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
+              onClick={()=> navigate(`/book/${e.isbn}`, { state: e })}
             >
               <div className="relative w-[263px] h-[225px]">
                 <img

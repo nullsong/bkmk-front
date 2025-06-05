@@ -56,7 +56,9 @@ const Header = () => {
         {
           isSearching ?  
           (<>
-            <div className="flex items-center w-[90%] bg-gray-100 px-3 py-2 rounded-full">
+            <div className="flex items-center w-[90%] bg-gray-100 px-3 py-2 rounded-full"
+                ref={inputBoxRef}
+            >
               <svg
                 className="w-4 h-4 text-gray-500 mr-2"
                 fill="none"
@@ -71,7 +73,6 @@ const Header = () => {
                 />
               </svg>
               <input
-                ref={inputBoxRef}
                 type="text"
                 placeholder="책 제목을 입력하세요"
                 className="w-full bg-transparent text-sm outline-none placeholder-gray-500"
