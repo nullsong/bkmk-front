@@ -24,8 +24,12 @@ const DetailContainer = () => {
 
   const [rating, setRating] = useState(0);
 
-  const handleChange = (e: any) => {
-    setRating(e.target.value);
+  const handleChange = (i: number) => {
+    if (i === rating) {
+      setRating(0);
+    } else {
+      setRating(i);
+    }
   }
   const handleClick = () => {
     mutate({

@@ -11,20 +11,6 @@ interface IProps {
 const BookDetail = ({ data, rating, handleChange, handleClick }: IProps) => {
   return (
     <>
-      {/*}
-      <div>
-        <label htmlFor="rating">별점주기</label>
-        <select id="rating" value={rating} onChange={handleChange}>
-          <option value={0}>선택해주세요</option>
-          <option value={1}>⭐️</option>
-          <option value={2}>⭐️⭐️</option>
-          <option value={3}>⭐️⭐️⭐️</option>
-          <option value={4}>⭐️⭐️⭐️⭐️</option>
-          <option value={5}>⭐️⭐️⭐️⭐️⭐️</option>
-        </select>
-        {rating > 0 && <button onClick={handleClick}>저장하기 버튼</button>}
-      </div> */}
-
       <div className="relative w-full max-w-[600px] mx-auto bg-white min-h-screen px-6 py-7 flex flex-col items-center gap-7">
         {/* 책 표지 */}
         <div className="w-[200px] h-[300px] relative">
@@ -53,22 +39,30 @@ const BookDetail = ({ data, rating, handleChange, handleClick }: IProps) => {
 
         <div className="flex flex-col justify-center items-center p-7 gap-7 relative w-full max-w-[600px] h-[300px] bg-[#F7F7F7] border border-[#F0F0F0] w-full">
           <div className="flex flex-row justify-center items-center gap-2 w-full h-[48px]">
-            {[1, 2, 3, 4, 5].map(i =>
-              <img src="/assets/images/star_empty.svg" alt="별점" />
-              // <Star key={i} filled={i <= 3} />
-            )}
+            {
+              [1, 2, 3, 4, 5].map((num: number) => (
+                <button
+                  key={num}
+                  onClick={() => handleChange(num)}
+                >
+                  {num <= rating ?
+                    <img src="/assets/images/star.svg" alt="별점" /> :
+                    <img src="/assets/images/star_empty.svg" alt="빈별점" />}
+                </button>
+              ))
+            }
           </div>
 
           <div className="flex flex-col gap-2 w-full max-w-[600px] h-[91px]">
             <div className="flex justify-center items-center p-5 gap-2.5 w-full h-[91px] bg-[#F0F0F0]">
               <textarea
-                placeholder="Write your review"
+                placeholder="리뷰를 작성해주세요."
                 className="w-full h-[51px] text-[14px] leading-[17px] text-[#808080] bg-transparent resize-none border-none focus:outline-none"
               />
             </div>
           </div>
 
-          <button className="relative w-full h-[56px] bg-[#495AF3] text-white font-bold text-[14px] leading-[17px] text-center px-10 py-[19.5px]">
+          <button className="relative w-full h-[56px] bg-[#495AF3] text-white font-bold text-[14px] leading-[17px] text-center px-10 py-[19.5px]" onClick={handleClick}>
             저장
           </button>
         </div>
