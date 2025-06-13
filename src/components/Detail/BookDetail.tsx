@@ -66,10 +66,7 @@ const BookDetail = ({ data, rating, handleChange, handleClick }: IProps) => {
             저장
           </button>
         </div>
-
       </div >
-
-
     </>
   )
 }

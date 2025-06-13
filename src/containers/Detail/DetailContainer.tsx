@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "@api/axiosInstance";
 import { BookDetail } from "@components";
@@ -20,8 +20,8 @@ type ReviewParam = {
 
 const DetailContainer = () => {
   const { state } = useLocation();
+  const isbn = state.isbn;
   const navigate = useNavigate();
-
   const [rating, setRating] = useState(0);
 
   const handleChange = (i: number) => {
@@ -38,7 +38,7 @@ const DetailContainer = () => {
       bookInfo: {
         title: state.title,
         author: state.author,
-        isbn: state.isbn,
+        isbn,
         publisher: state.publisher,
         publishedDate: state.publishedDate,
         image: state.image,
@@ -60,9 +60,21 @@ const DetailContainer = () => {
     },
   });
 
+  // 상세페이지 책 정보 조회
+  const getBookInfo = async (param: any) => {
+    const response = await axiosInstance.get('/book/info', { params: param });
+    return response.data;
+  };
+
+  const { data } = useQuery({
+    queryKey: ['bookinfo', isbn],
+    queryFn: () => getBookInfo({ isbn }),
+    enabled: !state.isSearch,
+  });
+
   return (
     <>
-      <BookDetail data={state} rating={rating} handleChange={handleChange} handleClick={handleClick} />
+      <BookDetail data={state.isSearch ? state : data} rating={rating} handleChange={handleChange} handleClick={handleClick} />
     </>
   )
 }
