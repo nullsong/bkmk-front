@@ -9,10 +9,10 @@ interface IProps {
 }
 
 const BookDetail = ({ data, rating, handleChange, handleClick }: IProps) => {
+
   return (
-    <>
+    <> {data &&
       <div className="relative w-full max-w-[600px] mx-auto bg-white min-h-screen px-6 py-7 flex flex-col items-center gap-7">
-        {/* 책 표지 */}
         <div className="w-[200px] h-[300px] relative">
           <img
             src={data.image}
@@ -67,6 +67,7 @@ const BookDetail = ({ data, rating, handleChange, handleClick }: IProps) => {
           </button>
         </div>
       </div >
+    }
     </>
   )
 }
