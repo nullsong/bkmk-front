@@ -25,8 +25,14 @@ const MainList = ({ data }: any) => {
                 <div className="text-center text-[#242424] font-bold text-[16px] leading-[19px]">
                   {e.title}
                 </div>
-                <div className="text-center text-[#808080] text-[14px] leading-[17px]">
-                  {e.reviewRating}
+                <div className="flex flex-row justify-center items-center gap-2 w-[16px]">
+                  {[1, 2, 3, 4, 5].map((num: number) => (
+                    num <= e.reviewRating ?
+                      <img src="/assets/images/star.svg" alt="별점" /> :
+                      <img src="/assets/images/star_empty.svg" alt="빈별점" />
+
+                  ))
+                  }
                 </div>
               </div>
             </div>
