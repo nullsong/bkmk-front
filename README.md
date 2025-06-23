@@ -16,16 +16,10 @@ React 기반의 독서 관리 어플 (개인 프로젝트)
 - **독서 목록 조회**: 별점이 저장된 도서 목록을 한눈에 확인
 
 
-## ⚙️ 실행 방법
-
-```bash
-git clone https://github.com/nullsong/bkmk-front.git
-cd bkmk-front
-npm install
-npm start
-
-```
+## 📌 배포 주소  
+👉 https://bkmk.vercel.app
 
 
-## 📌 기타
-현재는 로컬 환경에서만 실행 가능합니다.
+## 📌 기타 
+- 현재 배포된 프론트엔드는 UI와 구조 확인용으로만 접근 가능합니다.
+- 전체 기능은 로컬에서 백엔드와 함께 구동됩니다.
