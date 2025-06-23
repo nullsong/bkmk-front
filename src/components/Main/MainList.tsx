@@ -9,7 +9,7 @@ const MainList = ({ data }: any) => {
       {/* 내가 읽은 책 */}
       <section className="w-full bg-white px-4 sm:px-7 py-7">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
-          {data?.map((e: any, i: number) => (
+          {data?.map?.((e: any, i: number) => (
             <div
               key={i}
               className="flex flex-col justify-center items-center p-6 gap-6 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
