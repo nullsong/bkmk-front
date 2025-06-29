@@ -4,10 +4,11 @@ import { useLocation } from "react-router-dom";
 
 const SearchContainer = () => {
   const { state } = useLocation();
+  const { data, keyword } = state;
 
   return (
     <>
-      <Search state={state} />
+      <Search data={data} keyword={keyword} />
     </>
   )
 

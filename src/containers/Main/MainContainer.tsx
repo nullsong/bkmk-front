@@ -44,7 +44,7 @@ const MainContainer = () => {
   const handleSearch = async () => {
     const { data } = await refetch();
     if (data) {
-      navigate("/search", { state: data });
+      navigate("/search", { state: { data, keyword } });
     }
   };
 

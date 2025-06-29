@@ -1,16 +1,40 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Search = ({ state }: any) => {
+const Search = ({ data, keyword }: any) => {
   const navigate = useNavigate();
 
   return (
     <div className="relative w-full max-w-[600px] min-h-screen pt-[125px] mx-auto bg-[#F7F7F7]">
-      <div>검색창</div>
+      <div>
+        <div className="flex items-center w-[90%] bg-gray-100 px-3 py-2 rounded-full">
+          <svg
+            className="w-4 h-4 text-gray-500 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"
+            />
+          </svg>
+          <input
+            type="text"
+            placeholder="책 제목을 입력하세요"
+            className="w-full bg-transparent text-sm outline-none placeholder-gray-500"
+            defaultValue={keyword}
+          // onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          // onChange={handleChangeInput}
+          />
+        </div>
+      </div>
       <div>총 n 개</div>
       <section className="w-full bg-white px-4 sm:px-7 py-7">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
-          {state?.map?.((e: any, i: number) => (
+          {data?.map?.((e: any, i: number) => (
             <div
               key={i}
               className="flex flex-col justify-center items-center p-6 gap-6 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
