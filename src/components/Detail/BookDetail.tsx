@@ -47,8 +47,8 @@ const BookDetail = ({ data, rating, handleChange, handleClick }: IProps) => {
                   onClick={() => handleChange(num)}
                 >
                   {num <= rating ?
-                    <Star /> :
-                    <Empty />}
+                    <Star width={50} /> :
+                    <Empty width={50} />}
                 </button>
               ))
             }

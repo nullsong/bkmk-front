@@ -27,12 +27,11 @@ const MainList = ({ data }: any) => {
                 <div className="text-center text-[#242424] font-bold text-[16px] leading-[19px]">
                   {e.title}
                 </div>
-                <div className="flex flex-row justify-center items-center gap-2 w-[16px]">
+                <div className="flex flex-row justify-center items-center gap-2 w-[120px]">
                   {[1, 2, 3, 4, 5].map((num: number) => (
                     num <= e.reviewRating ?
                       <Star /> :
                       <Empty />
-
                   ))
                   }
                 </div>
@@ -46,8 +45,8 @@ const MainList = ({ data }: any) => {
             <span className="text-[#242424] font-bold text-[14px] leading-[17px]">Browse</span>
           </button>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   )
 }
 
