@@ -1,6 +1,7 @@
 import React from "react";
 import moment from 'moment';
-
+import Star from '@images/star.svg';
+import Empty from '@images/star_empty.svg';
 interface IProps {
   data: any;
   rating: number;
@@ -46,8 +47,8 @@ const BookDetail = ({ data, rating, handleChange, handleClick }: IProps) => {
                   onClick={() => handleChange(num)}
                 >
                   {num <= rating ?
-                    <img src="/assets/images/star.svg" alt="별점" /> :
-                    <img src="/assets/images/star_empty.svg" alt="빈별점" />}
+                    <Star /> :
+                    <Empty />}
                 </button>
               ))
             }

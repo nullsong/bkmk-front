@@ -13,9 +13,19 @@ module.exports = {
       '@images': path.resolve(__dirname, 'src/assets/images'),
       '@css': path.resolve(__dirname, 'src/assets/css'),
       '@utils': path.resolve(__dirname, 'src/utils')
-    }
+    },
+    configure: (webpackConfig) => {
+      const oneOfRule = webpackConfig.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf;
+
+      oneOfRule.unshift({
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      });
+
+      return webpackConfig;
+    },
   },
-    devServer: {
+  devServer: {
     allowedHosts: 'all',
   }
 };

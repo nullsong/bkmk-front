@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Star from '@images/star.svg';
+import Empty from '@images/star_empty.svg';
 
 const MainList = ({ data }: any) => {
   const navigate = useNavigate();
@@ -28,8 +30,8 @@ const MainList = ({ data }: any) => {
                 <div className="flex flex-row justify-center items-center gap-2 w-[16px]">
                   {[1, 2, 3, 4, 5].map((num: number) => (
                     num <= e.reviewRating ?
-                      <img src="/assets/images/star.svg" alt="별점" /> :
-                      <img src="/assets/images/star_empty.svg" alt="빈별점" />
+                      <Star /> :
+                      <Empty />
 
                   ))
                   }

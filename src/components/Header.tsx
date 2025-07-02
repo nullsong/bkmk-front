@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import MenuIcon from '@images/menu.svg';
+import SearchIcon from "@images/search.svg";
 interface IProps {
   setKeyword: any,
   handleChangeInput: (e: any) => void,
@@ -67,7 +68,7 @@ const Header = ({ setKeyword, handleChangeInput, handleSearch }: IProps) => {
             (<>
               {/* 메뉴 버튼 */}
               <button className="absolute left-7 top-1/2 w-[30px] h-[30px] bg-white flex items-center justify-center">
-                <img src="/assets/images/menu.svg" alt="메뉴 아이콘" className="w-6 h-6" />
+                <MenuIcon />
               </button>
 
               {/* 타이틀 */}
@@ -81,7 +82,7 @@ const Header = ({ setKeyword, handleChangeInput, handleSearch }: IProps) => {
               <div className="absolute right-7 top-1/2 flex gap-4">
                 <div className="relative w-[30px] h-[30px] bg-white flex items-center justify-center"
                   onClick={() => setIsSearching(true)} >
-                  <img src="/assets/images/search.svg" alt="검색" className="w-6 h-6" />
+                  <SearchIcon />
                 </div>
               </div>
             </>)
