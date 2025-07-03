@@ -1,10 +1,11 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import useSearchStore from "store/useSearchStore";
+import { useSearch } from "hooks/useSearch";
 
 const Search = ({ data }: any) => {
   const navigate = useNavigate();
   const { keyword, changeKeyword } = useSearchStore();
+  const { handleSearch } = useSearch();
 
   return (
     <div className="relative w-full max-w-[600px] min-h-screen pt-[125px] mx-auto bg-[#F7F7F7]">
@@ -28,8 +29,7 @@ const Search = ({ data }: any) => {
             placeholder="책 제목을 입력하세요"
             className="w-full bg-transparent text-sm outline-none placeholder-gray-500"
             defaultValue={keyword}
-            onKeyDown={(e) => e.key === "Enter"
-              // && handleSearch()
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()
             }
             onChange={e => changeKeyword(e.target.value)}
           />
@@ -42,7 +42,7 @@ const Search = ({ data }: any) => {
             <div
               key={i}
               className="flex flex-col justify-center items-center p-6 gap-6 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
-              onClick={() => navigate(`/book/${e.isbn}`, { state: { ...e, isSearch: true } })}
+              onClick={() => navigate(`/book/${e.isbn}`, { state: { data: e, isSearch: true } })}
             >
               <div className="relative w-[263px] h-[225px]">
                 <img

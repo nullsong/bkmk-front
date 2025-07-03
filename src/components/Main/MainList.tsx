@@ -15,7 +15,7 @@ const MainList = ({ data }: any) => {
             <div
               key={i}
               className="flex flex-col justify-center items-center p-6 gap-6 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
-              onClick={() => navigate(`/book/${e.isbn}`, { state: e })}
+              onClick={() => navigate(`/book/${e.isbn}`, { state: { data: e } })}
             >
               <div className="relative w-[263px] h-[225px]">
                 <img

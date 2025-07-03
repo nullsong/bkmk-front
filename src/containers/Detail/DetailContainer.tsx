@@ -7,8 +7,10 @@ import { ReviewParam } from "types/ReviewTypes";
 
 const DetailContainer = () => {
   const { state } = useLocation();
-  const isbn = state.isbn;
-  const bookSrno = state.bookSrno;
+  const { data, isSearch } = state;
+
+  const isbn = data.isbn;
+  const bookSrno = data.bookSrno;
 
   const navigate = useNavigate();
   const [rating, setRating] = useState(0);
@@ -23,15 +25,15 @@ const DetailContainer = () => {
   const handleClick = () => {
     mutate({
       reviewRating: rating,
-      isbn: state.isbn,
+      isbn,
       bookInfo: {
-        title: state.title,
-        author: state.author,
+        title: data.title,
+        author: data.author,
         isbn,
-        publisher: state.publisher,
-        publishedDate: state.publishedDate,
-        image: state.image,
-        description: state.description
+        publisher: data.publisher,
+        publishedDate: data.publishedDate,
+        image: data.image,
+        description: data.description
       }
     })
   };
@@ -47,7 +49,7 @@ const DetailContainer = () => {
   const { data: bookData } = useQuery({
     queryKey: ['bookinfo', isbn],
     queryFn: () => books.getBookInfo({ isbn }),
-    enabled: !state.isSearch,
+    enabled: !isSearch,
   });
 
   const { data: reviewData, isSuccess } = useQuery({
@@ -64,7 +66,7 @@ const DetailContainer = () => {
 
   return (
     <>
-      <BookDetail bookData={state.isSearch ? state : bookData} rating={rating} handleChange={handleChange} handleClick={handleClick} />
+      <BookDetail bookData={isSearch ? data : bookData} rating={rating} handleChange={handleChange} handleClick={handleClick} />
     </>
   )
 }
