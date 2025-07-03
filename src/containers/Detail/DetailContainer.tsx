@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "@api/axiosInstance";
@@ -21,6 +21,8 @@ type ReviewParam = {
 const DetailContainer = () => {
   const { state } = useLocation();
   const isbn = state.isbn;
+  const bookSrno = state.bookSrno;
+
   const navigate = useNavigate();
   const [rating, setRating] = useState(0);
 
@@ -47,6 +49,7 @@ const DetailContainer = () => {
     })
   };
 
+  // 내 리뷰 저장
   const createMyReview = async (param: ReviewParam): Promise<any> => {
     const res = await axiosInstance.post('/review/', param);
     return res.data;
@@ -66,15 +69,33 @@ const DetailContainer = () => {
     return response.data;
   };
 
-  const { data } = useQuery({
+  const { data: bookData } = useQuery({
     queryKey: ['bookinfo', isbn],
     queryFn: () => getBookInfo({ isbn }),
     enabled: !state.isSearch,
   });
 
+  // 상세페이지 내리뷰 조회
+  const getMyReview = async (param: any) => {
+    const response = await axiosInstance.get('/review/', { params: param });
+    return response.data;
+  };
+
+  const { data: reviewData, isSuccess } = useQuery({
+    queryKey: ['review', bookSrno],
+    queryFn: () => getMyReview({ userId: "1", bookSrno }),
+    enabled: true,
+  });
+
+  useEffect(() => {
+    if (isSuccess && reviewData?.reviewRating) {
+      setRating(reviewData.reviewRating);
+    }
+  }, [isSuccess, reviewData]);
+
   return (
     <>
-      <BookDetail data={state.isSearch ? state : data} rating={rating} handleChange={handleChange} handleClick={handleClick} />
+      <BookDetail bookData={state.isSearch ? state : bookData} rating={rating} handleChange={handleChange} handleClick={handleClick} />
     </>
   )
 }

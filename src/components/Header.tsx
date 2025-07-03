@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import MenuIcon from '@images/menu.svg';
 import SearchIcon from "@images/search.svg";
+import useSearchStore from "store/useSearchStore";
 interface IProps {
-  setKeyword: any,
-  handleChangeInput: (e: any) => void,
   handleSearch: () => void,
 }
 
-const Header = ({ setKeyword, handleChangeInput, handleSearch }: IProps) => {
+const Header = ({ handleSearch }: IProps) => {
+  const { changeKeyword } = useSearchStore();
+
   const inputBoxRef = useRef<any>(null);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -52,11 +53,11 @@ const Header = ({ setKeyword, handleChangeInput, handleSearch }: IProps) => {
                   placeholder="책 제목을 입력하세요"
                   className="w-full bg-transparent text-sm outline-none placeholder-gray-500"
                   onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                  onChange={handleChangeInput}
+                  onChange={(e) => changeKeyword(e.target.value)}
                 />
                 <button
                   onClick={() => {
-                    setKeyword("");
+                    changeKeyword('');
                     setIsSearching(false);
                   }}
                   className="ml-2 text-gray-500 hover:text-black text-xl"

@@ -3,21 +3,20 @@ import moment from 'moment';
 import Star from '@images/star.svg';
 import Empty from '@images/star_empty.svg';
 interface IProps {
-  data: any;
+  bookData: any;
   rating: number;
   handleChange: (e: any) => void;
   handleClick: (e: any) => void;
 }
 
-const BookDetail = ({ data, rating, handleChange, handleClick }: IProps) => {
-
+const BookDetail = ({ bookData, rating, handleChange, handleClick }: IProps) => {
   return (
-    <> {data &&
+    <> {bookData &&
       <div className="relative w-full max-w-[600px] mx-auto bg-white min-h-screen px-6 py-7 flex flex-col items-center gap-7">
         <div className="w-[200px] h-[300px] relative">
           <img
-            src={data.image}
-            alt={`${data.title} 표지`}
+            src={bookData.image}
+            alt={`${bookData.title} 표지`}
             className="w-full h-full object-cover rounded-md"
           />
         </div>
@@ -25,17 +24,17 @@ const BookDetail = ({ data, rating, handleChange, handleClick }: IProps) => {
         {/* 책 정보 */}
         <div className="flex flex-col items-center gap-2 text-center w-full">
           <h2 className="text-[#242424] text-[24px] font-bold leading-[29px]">
-            {data.title}
+            {bookData.title}
           </h2>
           <div className="flex flex-col justify-center items-center gap-1 text-[#808080] text-[16px]">
-            <span>{moment(data.publishedDate).format('YYYY.MM.DD')}</span>
-            <span>{data.author} | {data.publisher}</span>
+            <span>{moment(bookData.publishedDate).format('YYYY.MM.DD')}</span>
+            <span>{bookData.author} | {bookData.publisher}</span>
           </div>
         </div>
 
         {/* 줄거리 */}
         <p className="w-full max-w-[600px] text-[#808080] text-[16px] leading-[30px]">
-          {data.description}
+          {bookData.description}
         </p>
 
         <div className="flex flex-col justify-center items-center p-7 gap-7 relative w-full max-w-[600px] h-[300px] bg-[#F7F7F7] border border-[#F0F0F0] w-full">

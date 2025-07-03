@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useSearchStore from "store/useSearchStore";
 
-const Search = ({ data, keyword }: any) => {
+const Search = ({ data }: any) => {
   const navigate = useNavigate();
+  const { keyword, changeKeyword } = useSearchStore();
 
   return (
     <div className="relative w-full max-w-[600px] min-h-screen pt-[125px] mx-auto bg-[#F7F7F7]">
@@ -26,8 +28,10 @@ const Search = ({ data, keyword }: any) => {
             placeholder="책 제목을 입력하세요"
             className="w-full bg-transparent text-sm outline-none placeholder-gray-500"
             defaultValue={keyword}
-          // onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-          // onChange={handleChangeInput}
+            onKeyDown={(e) => e.key === "Enter"
+              // && handleSearch()
+            }
+            onChange={e => changeKeyword(e.target.value)}
           />
         </div>
       </div>

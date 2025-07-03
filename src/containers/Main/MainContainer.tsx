@@ -3,10 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "@api/axiosInstance";
 import { Header, MainList } from "@components";
+import useSearchStore from "store/useSearchStore";
 
 const MainContainer = () => {
   const navigate = useNavigate();
-  const [keyword, setKeyword] = useState(''); // 검색 키워드
+  const { keyword } = useSearchStore();
 
   /**
    * 책 검색
@@ -36,21 +37,16 @@ const MainContainer = () => {
     enabled: true,
   })
 
-  const handleChangeInput = (e: any) => {
-    const val = e.target.value;
-    setKeyword(val);
-  };
-
   const handleSearch = async () => {
     const { data } = await refetch();
     if (data) {
-      navigate("/search", { state: { data, keyword } });
+      navigate("/search", { state: { data } });
     }
   };
 
   return (
     <>
-      <Header setKeyword={setKeyword} handleChangeInput={handleChangeInput} handleSearch={handleSearch} />
+      <Header handleSearch={handleSearch} />
       <MainList data={rData} />
     </>
   )
