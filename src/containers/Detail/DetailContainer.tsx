@@ -1,22 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "react-router-dom";
-import axiosInstance from "@api/axiosInstance";
 import { BookDetail } from "@components";
-
-type ReviewParam = {
-  reviewRating: number;
-  isbn: string;
-  bookInfo: {
-    title: string;
-    author: string;
-    isbn: string;
-    publisher: string;
-    publishedDate: string;
-    image: string;
-    description: string;
-  };
-};
+import { books, reviews } from '@api/axiosAPI';
+import { ReviewParam } from "types/ReviewTypes";
 
 const DetailContainer = () => {
   const { state } = useLocation();
@@ -49,41 +36,23 @@ const DetailContainer = () => {
     })
   };
 
-  // 내 리뷰 저장
-  const createMyReview = async (param: ReviewParam): Promise<any> => {
-    const res = await axiosInstance.post('/review/', param);
-    return res.data;
-  };
-
   const { mutate } = useMutation<any, Error, ReviewParam>({
-    mutationFn: createMyReview,
+    mutationFn: reviews.createMyReview,
     onSuccess: async () => {
       alert("리뷰가 저장되었습니다!");
       navigate('/');
     },
   });
 
-  // 상세페이지 책 정보 조회
-  const getBookInfo = async (param: any) => {
-    const response = await axiosInstance.get('/book/info', { params: param });
-    return response.data;
-  };
-
   const { data: bookData } = useQuery({
     queryKey: ['bookinfo', isbn],
-    queryFn: () => getBookInfo({ isbn }),
+    queryFn: () => books.getBookInfo({ isbn }),
     enabled: !state.isSearch,
   });
 
-  // 상세페이지 내리뷰 조회
-  const getMyReview = async (param: any) => {
-    const response = await axiosInstance.get('/review/', { params: param });
-    return response.data;
-  };
-
   const { data: reviewData, isSuccess } = useQuery({
     queryKey: ['review', bookSrno],
-    queryFn: () => getMyReview({ userId: "1", bookSrno }),
+    queryFn: () => reviews.getMyReview({ userId: "1", bookSrno }),
     enabled: true,
   });
 
