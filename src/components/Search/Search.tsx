@@ -8,8 +8,8 @@ const Search = ({ data }: any) => {
   const { handleSearch } = useSearch();
 
   return (
-    <div className="relative w-full max-w-[600px] min-h-screen pt-[125px] mx-auto bg-[#F7F7F7]">
-      <div>
+    <div className="relative w-full max-w-[600px] min-h-screen pt-[125px] mx-auto">
+      <div className="justify-items-center">
         <div className="flex items-center w-[90%] bg-gray-100 px-3 py-2 rounded-full">
           <svg
             className="w-4 h-4 text-gray-500 mr-2"
@@ -35,7 +35,7 @@ const Search = ({ data }: any) => {
           />
         </div>
       </div>
-      <div>총 n 개</div>
+      <div className="mt-2 ml-8">총 {data.length} 개</div>
       <section className="w-full bg-white px-4 sm:px-7 py-7">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
           {data?.map?.((e: any, i: number) => (

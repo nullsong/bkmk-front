@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BookDetail } from "@components";
 import { books, reviews } from '@api/axiosAPI';
-import { ReviewParam } from "types/ReviewTypes";
+import { ReviewParams } from "types/ReviewTypes";
 
 const DetailContainer = () => {
   const { state } = useLocation();
@@ -38,11 +38,11 @@ const DetailContainer = () => {
     })
   };
 
-  const { mutate } = useMutation<any, Error, ReviewParam>({
+  const { mutate } = useMutation<string, Error, ReviewParams>({
     mutationFn: reviews.createMyReview,
     onSuccess: async () => {
       alert("리뷰가 저장되었습니다!");
-      navigate('/');
+      navigate('/home');
     },
   });
 

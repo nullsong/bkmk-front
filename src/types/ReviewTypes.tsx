@@ -1,4 +1,4 @@
-export type ReviewParam = {
+export type ReviewParams = {
   reviewRating: number;
   isbn: string;
   bookInfo: {
@@ -10,4 +10,9 @@ export type ReviewParam = {
     image: string;
     description: string;
   };
+};
+
+export type LoginParams = {
+  userId: string;
+  password: string;
 };

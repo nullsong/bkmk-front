@@ -1,5 +1,19 @@
-import { ReviewParam } from "types/ReviewTypes";
+import { ReviewParams } from "types/ReviewTypes";
 import axiosInstance from "./axiosInstance";
+
+
+// =================================================================
+//                          auth API
+// =================================================================
+export const auth = {
+  /**
+   * 로그인
+   */
+  postLogin: async (params: { userId: string, password: string }) => {
+    const response = await axiosInstance.post('/auth/login', params);
+    return response.data.token;
+  }
+};
 
 // =================================================================
 //                          books API
@@ -28,7 +42,7 @@ export const reviews = {
   /**
    * 내 리뷰 저장
    */
-  createMyReview: async (param: ReviewParam): Promise<any> => {
+  createMyReview: async (param: ReviewParams): Promise<any> => {
     const res = await axiosInstance.post('/review/', param);
     return res.data;
   },

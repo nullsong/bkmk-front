@@ -6,5 +6,8 @@ export { default as BookDetail } from './Detail/BookDetail';
 
 export { default as Search } from './Search/Search';
 
+export { default as AuthInput } from './Auth/AuthInput';
+
+
 
 
