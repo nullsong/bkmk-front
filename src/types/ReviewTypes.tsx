@@ -1,6 +1,8 @@
 export type ReviewParams = {
+  userId: string,
   reviewRating: number;
   isbn: string;
+  reviewText: string,
   bookInfo: {
     title: string;
     author: string;

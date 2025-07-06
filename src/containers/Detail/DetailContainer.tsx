@@ -4,15 +4,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { BookDetail } from "@components";
 import { books, reviews } from '@api/axiosAPI';
 import { ReviewParams } from "types/ReviewTypes";
+import { getUserId } from "@utils/utils";
 
 const DetailContainer = () => {
   const { state } = useLocation();
   const { data, isSearch } = state;
-
   const isbn = data.isbn;
   const bookSrno = data.bookSrno;
 
   const navigate = useNavigate();
+  const userId = getUserId().userId;
+
   const [rating, setRating] = useState(0);
 
   const handleChange = (i: number) => {
@@ -24,7 +26,9 @@ const DetailContainer = () => {
   }
   const handleClick = () => {
     mutate({
+      userId,
       reviewRating: rating,
+      reviewText: 'tessssst',
       isbn,
       bookInfo: {
         title: data.title,
@@ -54,7 +58,7 @@ const DetailContainer = () => {
 
   const { data: reviewData, isSuccess } = useQuery({
     queryKey: ['review', bookSrno],
-    queryFn: () => reviews.getMyReview({ userId: "1", bookSrno }),
+    queryFn: () => reviews.getMyReview({ userId, bookSrno }),
     enabled: true,
   });
 
