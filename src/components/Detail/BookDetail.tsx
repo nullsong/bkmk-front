@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from 'moment';
 import Star from '@images/star.svg';
 import Empty from '@images/star_empty.svg';
 interface IProps {
   bookData: any;
   rating: number;
+  text: string;
+  setText: (e: any) => void;
   handleChange: (e: any) => void;
   handleClick: (e: any) => void;
 }
 
-const BookDetail = ({ bookData, rating, handleChange, handleClick }: IProps) => {
+const BookDetail = ({ bookData, rating, text, setText, handleChange, handleClick }: IProps) => {
+  const isDisabled = rating === 0;
+
   return (
     <> {bookData &&
       <div className="relative w-full max-w-[600px] mx-auto bg-white min-h-screen px-6 py-7 flex flex-col items-center gap-7">
@@ -58,11 +62,17 @@ const BookDetail = ({ bookData, rating, handleChange, handleClick }: IProps) => 
               <textarea
                 placeholder="리뷰를 작성해주세요."
                 className="w-full h-[51px] text-[14px] leading-[17px] text-[#808080] bg-transparent resize-none border-none focus:outline-none"
+                defaultValue={text || ''}
+                onChange={(e) => setText(e.target.value)}
               />
             </div>
           </div>
 
-          <button className="relative w-full h-[56px] bg-[#495AF3] text-white font-bold text-[14px] leading-[17px] text-center px-10 py-[19.5px]" onClick={handleClick}>
+          <button
+            className={`relative w-full h-[56px] font-bold text-[14px] leading-[17px] text-center px-10 py-[19.5px] 
+            ${isDisabled ? 'bg-gray-400 text-white' : 'bg-[#495AF3] text-white'}`}
+            onClick={handleClick}
+            disabled={isDisabled}>
             저장
           </button>
         </div>

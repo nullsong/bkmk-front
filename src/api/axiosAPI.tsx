@@ -50,7 +50,7 @@ export const reviews = {
   /**
    * 상세페이지 내리뷰 조회
    */
-  getMyReview: async (param: { userId: string, bookSrno: number }) => {
+  getMyReview: async (param: { userId: string, isbn: number }) => {
     const response = await axiosInstance.get('/review/', { params: param });
     return response.data;
   },

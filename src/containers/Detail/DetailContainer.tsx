@@ -10,12 +10,12 @@ const DetailContainer = () => {
   const { state } = useLocation();
   const { data, isSearch } = state;
   const isbn = data.isbn;
-  const bookSrno = data.bookSrno;
 
   const navigate = useNavigate();
   const userId = getUserId().userId;
 
   const [rating, setRating] = useState(0);
+  const [text, setText] = useState('');
 
   const handleChange = (i: number) => {
     if (i === rating) {
@@ -28,7 +28,7 @@ const DetailContainer = () => {
     mutate({
       userId,
       reviewRating: rating,
-      reviewText: 'tessssst',
+      reviewText: text,
       isbn,
       bookInfo: {
         title: data.title,
@@ -57,20 +57,21 @@ const DetailContainer = () => {
   });
 
   const { data: reviewData, isSuccess } = useQuery({
-    queryKey: ['review', bookSrno],
-    queryFn: () => reviews.getMyReview({ userId, bookSrno }),
+    queryKey: ['review', isbn],
+    queryFn: () => reviews.getMyReview({ userId, isbn }),
     enabled: true,
   });
 
   useEffect(() => {
-    if (isSuccess && reviewData?.reviewRating) {
+    if (isSuccess && reviewData) {
       setRating(reviewData.reviewRating);
+      setText(reviewData.reviewText);
     }
   }, [isSuccess, reviewData]);
 
   return (
     <>
-      <BookDetail bookData={isSearch ? data : bookData} rating={rating} handleChange={handleChange} handleClick={handleClick} />
+      <BookDetail bookData={isSearch ? data : bookData} rating={rating} text={text} setText={setText} handleChange={handleChange} handleClick={handleClick} />
     </>
   )
 }
