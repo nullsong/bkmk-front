@@ -50,8 +50,8 @@ export const reviews = {
   /**
    * 상세페이지 내리뷰 조회
    */
-  getMyReview: async (param: { userId: string, isbn: number }) => {
-    const response = await axiosInstance.get('/review/', { params: param });
+  getMyReview: async (params: { userId: string, isbn: number }) => {
+    const response = await axiosInstance.get('/review/', { params });
     return response.data;
   },
 
@@ -62,5 +62,20 @@ export const reviews = {
     const response = await axiosInstance.get('/review/list', { params: param });
     return response.data;
   },
-};
 
+  /**
+   * 내 리뷰 수정
+   */
+  modifyMyReview: async (reviewId: string, params: { reviewRating: number, reviewText: string }): Promise<any> => {
+    const res = await axiosInstance.put(`/review/${reviewId}`, params);
+    return res.data;
+  },
+
+  /**
+   * 내 리뷰 삭제
+   */
+  removeMyReview: async (reviewId: string, params: { userId: string }): Promise<any> => {
+    const res = await axiosInstance.delete(`/review/${reviewId}`, { params });
+    return res.data;
+  },
+};
