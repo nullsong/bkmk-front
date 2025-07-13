@@ -1,4 +1,4 @@
-import { ReviewParams } from "types/ReviewTypes";
+import { ModifyReviewParams, ReviewParams } from "types/ReviewTypes";
 import axiosInstance from "./axiosInstance";
 
 
@@ -42,8 +42,8 @@ export const reviews = {
   /**
    * 내 리뷰 저장
    */
-  createMyReview: async (param: ReviewParams): Promise<any> => {
-    const res = await axiosInstance.post('/review/', param);
+  createMyReview: async (params: ReviewParams): Promise<any> => {
+    const res = await axiosInstance.post('/review/', params);
     return res.data;
   },
 
@@ -66,8 +66,8 @@ export const reviews = {
   /**
    * 내 리뷰 수정
    */
-  modifyMyReview: async (reviewId: string, params: { reviewRating: number, reviewText: string }): Promise<any> => {
-    const res = await axiosInstance.put(`/review/${reviewId}`, params);
+  modifyMyReview: async (params: ModifyReviewParams): Promise<any> => {
+    const res = await axiosInstance.put(`/review/${params.reviewId}`, params);
     return res.data;
   },
 

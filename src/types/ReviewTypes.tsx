@@ -1,5 +1,5 @@
 export type ReviewParams = {
-  userId: string,
+  userId: string;
   reviewRating: number;
   isbn: string;
   reviewText: string,
@@ -18,3 +18,10 @@ export type LoginParams = {
   userId: string;
   password: string;
 };
+
+export type ModifyReviewParams = {
+  userId: string;
+  reviewId: number;
+  reviewRating: number;
+  reviewText: string;
+}
