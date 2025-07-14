@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: '',
+  baseURL: 'https://bkmk-jl47.onrender.com/',
   headers: {
     'Content-Type': 'application/json',
   },
