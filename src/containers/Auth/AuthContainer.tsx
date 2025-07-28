@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { auth } from "@api/axiosAPI";
-import { AuthInput } from "@components";
+import { AuthInput, Loading } from "@components";
 import { LoginParams } from "types/ReviewTypes";
 
 const AuthContainer = () => {
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(true);
   const [id, setId] = useState("test@gmail.com");
   const [pw, setPw] = useState("1234");
 
@@ -24,8 +25,19 @@ const AuthContainer = () => {
     },
   })
 
+  useEffect(() => {
+    fetch("https://bkmk-jl47.onrender.com/ping")
+      .then(() => setIsLoading(false))
+      .catch(() => setIsLoading(false));
+  }, []);
+
+
   return (
-    <><AuthInput userId={id} setUserId={setId} password={pw} setPassword={setPw} mutate={mutate} /></>
+    <>
+      {isLoading ?
+        <Loading /> :
+        <AuthInput userId={id} setUserId={setId} password={pw} setPassword={setPw} mutate={mutate} />}
+    </>
   )
 }
 

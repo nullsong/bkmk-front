@@ -11,7 +11,7 @@ interface IProps {
 const AuthInput = ({ userId, setUserId, password, setPassword, mutate }: IProps) => {
   return (
     <>
-      <div className="flex flex-col items-start p-[28px] gap-[28px] absolute h-[264px] bg-[#ffffff]">
+      <div className="relative flex flex-col items-start p-[28px] gap-[28px] h-[264px] bg-[#ffffff]">
         <div className="gap-[16px] w-[319px] h-[90px] flex-none self-stretch">
           <div className="h-[25px] text-[14px] leading-[17px] font-normal text-[#808080] font-['Inter'] order-0">ID</div>
           <input
