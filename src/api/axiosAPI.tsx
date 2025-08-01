@@ -1,7 +1,6 @@
 import { ModifyReviewParams, ReviewParams } from "types/ReviewTypes";
 import axiosInstance from "./axiosInstance";
 
-
 // =================================================================
 //                          auth API
 // =================================================================
