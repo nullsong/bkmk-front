@@ -9,7 +9,7 @@ export const useSearch = () => {
 
   const { refetch, isLoading, error } = useQuery({
     queryKey: ['books', keyword],
-    queryFn: () => books.getBooks({ keyword }),
+    queryFn: () => books.getBooks({ keyword, start: 1 }),
     enabled: false,
   })
 

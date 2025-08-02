@@ -21,7 +21,7 @@ export const books = {
   /**
    * 책 검색
    */
-  getBooks: async (param: { keyword: string }) => {
+  getBooks: async (param: { keyword: string, start: number }) => {
     const response = await axiosInstance.get('/book/', { params: param });
     return response.data;
   },
