@@ -17,6 +17,7 @@ export const useSearch = () => {
     try {
       const { data } = await refetch();
       if (data) {
+        console.log('이동');
         navigate("/search", { state: { data } });
       }
     } catch (e) {

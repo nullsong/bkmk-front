@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import useSearchStore from "store/useSearchStore";
 import { useSearch } from "hooks/useSearch";
+import useSearchStore from "store/useSearchStore";
 
 const Search = ({ data }: any) => {
   const navigate = useNavigate();
-  const { keyword, changeKeyword } = useSearchStore();
   const { handleSearch } = useSearch();
+  const { keyword, changeKeyword } = useSearchStore();
 
   return (
     <div className="relative w-full max-w-[600px] min-h-screen pt-[125px] mx-auto">
@@ -35,10 +35,10 @@ const Search = ({ data }: any) => {
           />
         </div>
       </div>
-      <div className="mt-2 ml-8">총 {data.total} 개</div>
+      <div className="mt-2 ml-8">총  개</div>
       <section className="w-full bg-white px-4 sm:px-7 py-7">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
-          {data?.bookList?.map?.((e: any, i: number) => (
+          {data?.map?.((e: any, i: number) => (
             <div
               key={i}
               className="flex flex-col justify-center items-center p-6 gap-6 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
