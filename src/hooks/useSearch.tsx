@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { books } from "@api/axiosAPI"
 import useSearchStore from "store/useSearchStore";
 
+// 삭제 예정
 export const useSearch = () => {
   const navigate = useNavigate();
   const { keyword } = useSearchStore();

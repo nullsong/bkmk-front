@@ -1,10 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { useSearch } from "hooks/useSearch";
 import useSearchStore from "store/useSearchStore";
 
-const Search = ({ data }: any) => {
+const Search = ({ data, total, setSearchWord }: any) => {
   const navigate = useNavigate();
-  const { handleSearch } = useSearch();
   const { keyword, changeKeyword } = useSearchStore();
 
   return (
@@ -28,14 +26,13 @@ const Search = ({ data }: any) => {
             type="text"
             placeholder="책 제목을 입력하세요"
             className="w-full bg-transparent text-sm outline-none placeholder-gray-500"
-            defaultValue={keyword}
-            onKeyDown={(e) => e.key === "Enter" && handleSearch()
-            }
+            value={keyword}
+            onKeyDown={(e) => e.key === "Enter" && setSearchWord(keyword)}
             onChange={e => changeKeyword(e.target.value)}
           />
         </div>
       </div>
-      <div className="mt-2 ml-8">총  개</div>
+      <div className="mt-2 ml-8">총 {total}개</div>
       <section className="w-full bg-white px-4 sm:px-7 py-7">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
           {data?.map?.((e: any, i: number) => (

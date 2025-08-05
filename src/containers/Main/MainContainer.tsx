@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Header, MainList } from "@components";
 import { reviews } from "@api/axiosAPI";
-import { useSearch } from "hooks/useSearch";
 import { getUserId } from "@utils/utils";
 
 const MainContainer = () => {
@@ -13,11 +12,9 @@ const MainContainer = () => {
     enabled: true,
   })
 
-  const { handleSearch } = useSearch();
-
   return (
     <>
-      <Header handleSearch={handleSearch} />
+      <Header />
       <MainList data={rData} />
     </>
   )
