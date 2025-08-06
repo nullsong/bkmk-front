@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Star from '@images/star.svg';
 import Empty from '@images/star_empty.svg';
 
 const MainList = ({ data }: any) => {
   const navigate = useNavigate();
+  const [showAll, setShowAll] = useState(false);
 
   return (
     <div className="relative w-full max-w-[600px] min-h-screen pt-[125px] mx-auto bg-[#F7F7F7]">
       {/* 내가 읽은 책 */}
       <section className="w-full bg-white px-4 sm:px-7 py-7">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
-          {data?.map?.((e: any, i: number) => (
+          {(showAll ? data : data?.slice(0, 10))?.map?.((e: any, i: number) => (
             <div
               key={i}
               className="flex flex-col justify-center items-center p-6 gap-6 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
@@ -40,11 +41,16 @@ const MainList = ({ data }: any) => {
           ))}
         </div>
 
-        <div className="flex justify-center mt-6">
-          <button className="flex justify-center items-center py-[19.5px] px-10 gap-2 w-full max-w-[319px] border border-[#EBEBEB] rounded">
-            <span className="text-[#242424] font-bold text-[14px] leading-[17px]">Browse</span>
-          </button>
-        </div>
+        {data?.length > 10 && !showAll && (
+          <div className="flex justify-center mt-6">
+            <button className="flex justify-center items-center py-[19.5px] px-10 gap-2 w-full max-w-[319px] border border-[#EBEBEB] rounded"
+              onClick={() => setShowAll(true)}>
+              <span className="text-[#242424] font-bold text-[14px] leading-[17px]">Browse</span>
+            </button>
+          </div>
+        )
+        }
+
       </section >
     </div >
   )
