@@ -4,7 +4,7 @@ import SearchIcon from "@images/search.svg";
 import useSearchStore from "store/useSearchStore";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ tab, setTab }: any) => {
   const { changeKeyword } = useSearchStore();
   const navigate = useNavigate();
 
@@ -91,13 +91,13 @@ const Header = () => {
 
       {/* 탭 메뉴 */}
       <nav className="w-full h-[52px] bg-white flex">
-        <div className="w-1/2 flex flex-col items-center pt-4">
-          <span className="text-sm font-bold text-[#242424]">내가 읽은 책</span>
-          <div className="w-full h-[3px] bg-[#495AF3]" />
+        <div className="w-1/2 flex flex-col items-center pt-4" onClick={() => setTab("read")}>
+          <span className={`text-sm ${tab === 'read' ? 'font-bold text-[#242424]' : 'text-[#808080]'}`}>내가 읽은 책</span>
+          <div className={`w-full h-[3px] ${tab === 'read' ? 'bg-[#495AF3]' : 'bg-white'} `} />
         </div>
-        <div className="w-1/2 flex flex-col items-center pt-4">
-          <span className="text-sm text-[#808080]">나의 독서</span>
-          <div className="w-full h-[3px] bg-white" />
+        <div className="w-1/2 flex flex-col items-center pt-4" onClick={() => setTab('stats')}>
+          <span className={`text-sm ${tab === 'stats' ? 'font-bold text-[#242424]' : 'text-[#808080]'}`}>나의 독서</span>
+          <div className={`w-full h-[3px] ${tab === 'stats' ? 'bg-[#495AF3]' : 'bg-white'} `} />
         </div>
       </nav>
     </header>
