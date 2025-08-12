@@ -27,4 +27,5 @@ React 기반의 독서 관리 어플 (개인 프로젝트)
  - 나의 독서 분석 (독서량, 선호 작가 등)
    
 ## 📌 배포 주소  
- https://bkmk-front.vercel.app
+- Backend API: Render에서 운영 중
+- Frontend: https://bkmk-front.vercel.app
