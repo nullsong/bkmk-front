@@ -49,9 +49,11 @@ const BookDetail = ({ bookData, rating, text, setText, handleChange, handleClick
                   key={num}
                   onClick={() => handleChange(num)}
                 >
-                  {num <= rating ?
-                    <Star width={50} /> :
-                    <Empty width={50} />}
+                  <div className="w-10 sm:w-30 md:w-50">
+                    {num <= rating ?
+                      <Star className="w-full h-auto" /> :
+                      <Empty className="w-full h-auto" />}
+                  </div>
                 </button>
               ))
             }
