@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Star from '@images/star.svg';
 import Empty from '@images/star_empty.svg';
 
-const MainList = ({ data }: any) => {
+const MainList = ({ data, handleDelete }: any) => {
   const navigate = useNavigate();
   const [showAll, setShowAll] = useState(false);
 
@@ -19,8 +19,11 @@ const MainList = ({ data }: any) => {
                 className="flex flex-col justify-center items-center p-6 gap-3 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
                 onClick={() => navigate(`/book/${e.isbn}`, { state: { data: e } })}
               >
-                <div className="flex w-full flex-row justify-end">
-                  <div className="flex items-center justify-center w-[23px] h-[23px] text-[14px] mt-[-10px]">X</div>
+                <div className="flex w-full justify-end">
+                  <div className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px]" onClick={(event) => {
+                    event.stopPropagation();
+                    handleDelete(e.reviewId);
+                  }}>X</div>
                 </div>
                 <div className="relative w-[263px] h-[225px]">
                   <img

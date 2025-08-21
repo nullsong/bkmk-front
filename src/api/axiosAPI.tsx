@@ -73,8 +73,10 @@ export const reviews = {
   /**
    * 내 리뷰 삭제
    */
-  removeMyReview: async (reviewId: string, params: { userId: string }): Promise<any> => {
-    const res = await axiosInstance.delete(`/review/${reviewId}`, { params });
+  removeMyReview: async (params: { reviewId: string, userId: string }): Promise<any> => {
+    const res = await axiosInstance.delete(`/review/${params.reviewId}`, {
+      params: { userId: params.userId }
+    });
     return res.data;
   },
 };
