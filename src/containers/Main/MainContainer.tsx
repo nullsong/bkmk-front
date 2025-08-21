@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Header, MainList, StatsList } from "@components";
 import { reviews } from "@api/axiosAPI";
 import { getUserId } from "@utils/utils";
-import { useState } from "react";
 
 const MainContainer = () => {
   const userId = getUserId().userId;

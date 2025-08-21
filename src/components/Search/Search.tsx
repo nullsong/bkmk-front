@@ -6,7 +6,7 @@ const Search = ({ data, total, setSearchWord }: any) => {
   const { keyword, changeKeyword } = useSearchStore();
 
   return (
-    <div className="relative w-full max-w-[600px] min-h-screen pt-[125px] mx-auto">
+    <div className="relative w-full max-w-[600px] min-h-screen pt-[50px] mx-auto">
       <div className="justify-items-center">
         <div className="flex items-center w-[90%] bg-gray-100 px-3 py-2 rounded-full">
           <svg
