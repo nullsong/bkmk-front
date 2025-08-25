@@ -33,10 +33,8 @@ const MainContainer = () => {
 
   useEffect(() => {
     const handlePageShow = (e: any) => {
-      if (e.persisted) {
-        console.log("복원됨")
-        qc.invalidateQueries({ queryKey: ['reviews', userId] });
-      }
+      console.log(e);
+      qc.invalidateQueries({ queryKey: ['reviews', userId] });
     };
 
     window.addEventListener('pageshow', handlePageShow);
