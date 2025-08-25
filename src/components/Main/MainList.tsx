@@ -26,7 +26,7 @@ const MainList = ({ data, handleDelete }: any) => {
                 onClick={() => navigate(`/book/${e.isbn}`, { state: { data: e } })}
               >
                 <div className="flex w-full justify-end">
-                  <button className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px] relative z-10"
+                  <button className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px]"
                     onClick={(event) => handleButtonClick(event, e.reviewId)}
                     onTouchEnd={(event) => handleButtonClick(event, e.reviewId)}
                   >X</button>
