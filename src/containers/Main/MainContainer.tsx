@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Header, MainList, StatsList } from "@components";
 import { reviews } from "@api/axiosAPI";
@@ -14,6 +14,7 @@ const MainContainer = () => {
     queryFn: () => reviews.getReviews({ userId }),
     staleTime: 0,
     refetchOnMount: 'always',
+    refetchOnWindowFocus: true,
   })
 
   const { mutate: removeMyReview } = useMutation<string, Error, { reviewId: string; userId: string }>({
@@ -29,6 +30,15 @@ const MainContainer = () => {
       removeMyReview({ reviewId, userId });
     }
   };
+
+  useEffect(() => {
+    const handlePageShow = () => {
+      qc.invalidateQueries({ queryKey: ['reviews', userId] });
+    };
+
+    window.addEventListener('pageshow', handlePageShow);
+    return () => window.removeEventListener('pageshow', handlePageShow);
+  }, [qc, userId]);
 
   return (
     <>
