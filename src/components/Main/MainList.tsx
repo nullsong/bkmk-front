@@ -7,6 +7,12 @@ const MainList = ({ data, handleDelete }: any) => {
   const navigate = useNavigate();
   const [showAll, setShowAll] = useState(false);
 
+  const handleButtonClick = (event: any, id: string,) => {
+    event.preventDefault();
+    event.stopPropagation();
+    handleDelete(id);
+  };
+
   return (
     <>
       <div className="relative w-full max-w-[600px] min-h-screen pt-[125px] mx-auto bg-[#F7F7F7]">
@@ -20,11 +26,10 @@ const MainList = ({ data, handleDelete }: any) => {
                 onClick={() => navigate(`/book/${e.isbn}`, { state: { data: e } })}
               >
                 <div className="flex w-full justify-end">
-                  <button className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px] relative z-10" onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    handleDelete(e.reviewId);
-                  }}>X</button>
+                  <button className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px] relative z-10"
+                    onClick={(event) => handleButtonClick(event, e.reviewId)}
+                    onTouchEnd={(event) => handleButtonClick(event, e.reviewId)}
+                  >X</button>
                 </div>
                 <div className="relative w-[263px] h-[225px]">
                   <img
