@@ -32,14 +32,16 @@ const MainContainer = () => {
   };
 
   useEffect(() => {
+    console.log('test')
     const handlePageShow = (e: any) => {
-      console.log(e);
+      console.log(e)
       qc.invalidateQueries({ queryKey: ['reviews', userId] });
     };
 
     window.addEventListener('pageshow', handlePageShow);
     return () => window.removeEventListener('pageshow', handlePageShow);
-  }, [qc, userId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
