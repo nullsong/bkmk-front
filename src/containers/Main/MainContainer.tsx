@@ -34,7 +34,7 @@ const MainContainer = () => {
   useEffect(() => {
     const handlePageShow = (e: PageTransitionEvent) => {
       if (e.persisted) {
-        refetch()
+        window.location.reload();
       }
     };
 
