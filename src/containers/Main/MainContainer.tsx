@@ -32,8 +32,10 @@ const MainContainer = () => {
   };
 
   useEffect(() => {
-    const handlePageShow = () => {
-      qc.invalidateQueries({ queryKey: ['reviews', userId] });
+    const handlePageShow = (e: any) => {
+      if (e.persisted) {
+        qc.invalidateQueries({ queryKey: ['reviews', userId] });
+      }
     };
 
     window.addEventListener('pageshow', handlePageShow);
