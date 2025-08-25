@@ -1,24 +1,26 @@
 import { useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Header, MainList, StatsList } from "@components";
 import { reviews } from "@api/axiosAPI";
 import { getUserId } from "@utils/utils";
 
 const MainContainer = () => {
+  const qc = useQueryClient();
   const userId = getUserId().userId;
   const [tab, setTab] = useState('read');
 
   const { data: rData } = useQuery({
-    queryKey: ['reviews'],
+    queryKey: ['reviews', userId],
     queryFn: () => reviews.getReviews({ userId }),
-    enabled: true,
+    staleTime: 0,
+    refetchOnMount: 'always',
   })
 
   const { mutate: removeMyReview } = useMutation<string, Error, { reviewId: string; userId: string }>({
     mutationFn: reviews.removeMyReview,
     onSuccess: () => {
       alert("리뷰가 삭제되었습니다!");
-      window.location.reload();
+      qc.invalidateQueries({ queryKey: ['reviews', userId] });
     },
   });
 
