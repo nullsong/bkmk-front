@@ -17,31 +17,33 @@ const MainList = ({ data, handleDelete }: any) => {
               <div
                 key={i}
                 className="flex flex-col justify-center items-center p-6 gap-3 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
-                onClick={() => navigate(`/book/${e.isbn}`, { state: { data: e } })}
               >
                 <div className="flex w-full justify-end">
-                  <div className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px]" onClick={(event) => {
-                    event.stopPropagation();
+                  <div className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px]" onClick={() => {
                     handleDelete(e.reviewId);
                   }}>X</div>
                 </div>
-                <div className="relative w-[263px] h-[225px]">
-                  <img
-                    src={e.image}
-                    alt={`${e.title}image`}
-                    className="absolute w-[150px] h-[225px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-cover" />
-                </div>
-                <div className="flex flex-col items-center gap-[10px] w-full">
-                  <div className="text-center text-[#242424] font-bold text-[16px] leading-[19px]">
-                    {e.title.length > 17 ? e.title.slice(0, 17) + '...' : e.title}
+                <div
+                  onClick={() => navigate(`/book/${e.isbn}`, { state: { data: e } })}
+                >
+                  <div className="relative w-[263px] h-[225px]">
+                    <img
+                      src={e.image}
+                      alt={`${e.title}image`}
+                      className="absolute w-[150px] h-[225px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-cover" />
                   </div>
-                  <div className="flex flex-row justify-center items-center gap-2 w-[120px]">
-                    {[1, 2, 3, 4, 5].map((num: number) => (
-                      num <= e.reviewRating ?
-                        <Star /> :
-                        <Empty />
-                    ))
-                    }
+                  <div className="flex flex-col items-center gap-[10px] w-full">
+                    <div className="text-center text-[#242424] font-bold text-[16px] leading-[19px]">
+                      {e.title.length > 17 ? e.title.slice(0, 17) + '...' : e.title}
+                    </div>
+                    <div className="flex flex-row justify-center items-center gap-2 w-[120px]">
+                      {[1, 2, 3, 4, 5].map((num: number) => (
+                        num <= e.reviewRating ?
+                          <Star /> :
+                          <Empty />
+                      ))
+                      }
+                    </div>
                   </div>
                 </div>
               </div>
