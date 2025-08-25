@@ -20,7 +20,7 @@ const MainList = ({ data, handleDelete }: any) => {
                 onClick={() => navigate(`/book/${e.isbn}`, { state: { data: e } })}
               >
                 <button className="flex w-full justify-end">
-                  <div className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px]" onClick={(event) => {
+                  <div className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px] relative z-10" onClick={(event) => {
                     event.preventDefault();
                     event.stopPropagation();
                     handleDelete(e.reviewId);
