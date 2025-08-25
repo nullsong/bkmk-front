@@ -19,13 +19,13 @@ const MainList = ({ data, handleDelete }: any) => {
                 className="flex flex-col justify-center items-center p-6 gap-3 w-full max-w-[319px] bg-[#F7F7F7] rounded-md shadow-sm"
                 onClick={() => navigate(`/book/${e.isbn}`, { state: { data: e } })}
               >
-                <button className="flex w-full justify-end">
-                  <div className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px] relative z-10" onClick={(event) => {
+                <div className="flex w-full justify-end">
+                  <button className="flex justify-center items-center w-[25px] h-[25px] text-[14px] mt-[-10px] relative z-10" onClick={(event) => {
                     event.preventDefault();
                     event.stopPropagation();
                     handleDelete(e.reviewId);
-                  }}>X</div>
-                </button>
+                  }}>X</button>
+                </div>
                 <div className="relative w-[263px] h-[225px]">
                   <img
                     src={e.image}
