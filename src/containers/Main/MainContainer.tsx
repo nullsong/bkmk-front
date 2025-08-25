@@ -9,7 +9,7 @@ const MainContainer = () => {
   const userId = getUserId().userId;
   const [tab, setTab] = useState('read');
 
-  const { data: rData } = useQuery({
+  const { refetch, data: rData } = useQuery({
     queryKey: ['reviews', userId],
     queryFn: () => reviews.getReviews({ userId }),
     staleTime: 0,
@@ -32,13 +32,15 @@ const MainContainer = () => {
   };
 
   useEffect(() => {
-    const handlePageShow = () => {
-      qc.invalidateQueries({ queryKey: ['reviews', userId] });
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        refetch()
+      }
     };
 
     window.addEventListener('pageshow', handlePageShow);
     return () => window.removeEventListener('pageshow', handlePageShow);
-  }, [qc, userId]);
+  }, []);
 
   return (
     <>
