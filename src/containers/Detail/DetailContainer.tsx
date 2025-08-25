@@ -77,7 +77,9 @@ const DetailContainer = () => {
     mutationFn: reviews.modifyMyReview,
     onSuccess: async () => {
       alert("리뷰가 수정되었습니다!");
-      navigate('/home');
+      setTimeout(() => {
+        navigate('/home');
+      }, 100);
     },
   });
 
