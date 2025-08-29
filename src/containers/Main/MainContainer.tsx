@@ -9,13 +9,20 @@ const MainContainer = () => {
   const userId = getUserId().userId;
   const [tab, setTab] = useState('read');
 
-  const { refetch, data: rData } = useQuery({
+  const { data: reviewData } = useQuery({
     queryKey: ['reviews', userId],
     queryFn: () => reviews.getReviews({ userId }),
     staleTime: 0,
     refetchOnMount: 'always',
     refetchOnWindowFocus: true,
   })
+
+  const { data: ratingData } = useQuery({
+    queryKey: ['rating', userId],
+    queryFn: () => reviews.getMyRating({ userId }),
+    enabled: true
+  })
+
 
   const { mutate: removeMyReview } = useMutation<string, Error, { reviewId: string; userId: string }>({
     mutationFn: reviews.removeMyReview,
@@ -46,7 +53,7 @@ const MainContainer = () => {
     <>
       <Header tab={tab} setTab={setTab} />
       {tab === 'read' ?
-        <MainList data={rData} handleDelete={handleDelete} /> : <StatsList />}
+        <MainList data={reviewData} handleDelete={handleDelete} /> : <StatsList data={ratingData} />}
     </>
   )
 

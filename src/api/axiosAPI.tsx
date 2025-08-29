@@ -79,4 +79,12 @@ export const reviews = {
     });
     return res.data;
   },
+
+  /**
+   * 나의 별점 조회 
+   */
+  getMyRating: async (params: { userId: string }) => {
+    const response = await axiosInstance.get('/review/rating', { params });
+    return response.data;
+  },
 };
