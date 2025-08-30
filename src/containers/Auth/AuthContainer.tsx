@@ -26,7 +26,8 @@ const AuthContainer = () => {
   })
 
   useEffect(() => {
-    fetch("https://bkmk-jl47.onrender.com/ping")
+    fetch("https://bkmk-1.onrender.com/ping")
+      // fetch("http://localhost:8080/ping")
       .then(() => setIsLoading(false))
       .catch(() => setIsLoading(false));
   }, []);
