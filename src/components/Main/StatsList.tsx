@@ -31,7 +31,7 @@ const StatsList = ({ data }: { data: { reviewRating: string; count: number }[] }
             axisLeft={null}
             colorBy="indexValue"
             colors={{ scheme: 'blues' }}
-            margin={{ top: 80, right: 20, bottom: 50, left: 20 }}
+            margin={{ top: 50, right: 20, bottom: 50, left: 20 }}
           />
 
         </div>
@@ -45,7 +45,7 @@ const StatsList = ({ data }: { data: { reviewRating: string; count: number }[] }
             <div>별점 개수</div>
           </div>
           <div className='flex-col text-center'>
-            <div className='font-bold text-[17px] mb-1'>{max?.reviewRating}</div>
+            <div className='font-bold text-[17px] mb-1'>{max?.reviewRating.replace("점", "")}</div>
             <div>많이 준 별점</div>
           </div>
         </div>
